@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.example.musicprojectjpa.persistence.model.main.User" table="user">
+        <!--field access is better than property access-->
+        <id access="field" name="id" column="id">
+            <generator class="increment"/>
+        </id>
+        <!--Lazy collection loads the child objects on demand, it is used to improve performance.
+        Since Hibernate 3.0, lazy collection is enabled by default.-->
+        <!--property inverse: if the child class become the relationship owner-->
+        <!--property lazy: how to load child entity, true lazy or false eager, default to eager pattern-->
+        <!--property cascade: how parent entities affect child entities in terms of crud operation;
+        For more details on parameters, refer to cascadeType -->
+        <!--fetch: how to fetch data-->
+        <set name="authorities" table="user_authority"  access="field"
+             inverse="false" lazy="true" cascade="all" fetch="select">
+        <!--foreign key-->
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.example.musicprojectjpa.persistence.model.main.Authority" >
+                <column name="stock_id" not-null="true"/>
+            </many-to-many>
+        </set>
+        <properties name="userProperties">
+            <property access="field" name="password" column="password"/>
+            <property access="field" name="enabled" column="enabled"/>
+        </properties>
+    </class>
+</hibernate-mapping>
