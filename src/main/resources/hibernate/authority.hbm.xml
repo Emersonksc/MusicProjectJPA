@@ -5,11 +5,11 @@
 
 <hibernate-mapping>
 
-    <class name="com.example.musicprojectjpa.persistence.model.main.Authority" table="authority">
+    <class name="com.example.musicprojectjpa.persistence.model.general.Authority" table="authority">
         <id name="id" column="id">
             <generator class="increment"/>
         </id>
-        <component name="authority" class="SimpleGrantedAuthority" lazy="true">
+        <component name="authority" class="org.springframework.security.core.authority.SimpleGrantedAuthority" lazy="true">
             <property name="role" access="field"/>
         </component>
     </class>

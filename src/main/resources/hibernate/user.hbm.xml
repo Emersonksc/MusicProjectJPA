@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.example.musicprojectjpa.persistence.model.main.User" table="user">
+    <class name="com.example.musicprojectjpa.persistence.model.general.User" table="user">
         <!--field access is better than property access-->
         <id access="field" name="id" column="id">
             <generator class="increment"/>
@@ -16,19 +16,40 @@
         <!--property cascade: how parent entities affect child entities in terms of crud operation;
         For more details on parameters, refer to cascadeType -->
         <!--fetch: how to fetch data-->
-        <set name="authorities" table="user_authority"  access="field"
+        <set name="authorities" table="user_authority" access="field"
              inverse="false" lazy="true" cascade="all" fetch="select">
-        <!--foreign key-->
-            <key>
-                <column name="user_id" not-null="true" />
-            </key>
-            <many-to-many entity-name="com.example.musicprojectjpa.persistence.model.main.Authority" >
-                <column name="stock_id" not-null="true"/>
+            <!--foreign key-->
+            <key column="user_id" not-null="true"/>
+            <many-to-many entity-name="com.example.musicprojectjpa.persistence.model.general.Authority">
+                <column name="authority_id" not-null="true"/>
             </many-to-many>
         </set>
+        <set name="emotion" access="field" lazy="true" cascade="save-update, lock, refresh, merge">
+            <key column="user_id" not-null="true"/>
+            <one-to-many entity-name="com.example.musicprojectjpa.persistence.model.business.general.Emotion"/>
+        </set>
+
+        <set name="instruments" access="field" lazy="true" cascade="save-update, lock, refresh, merge">
+            <key column="user_id" not-null="true"/>
+            <one-to-many entity-name="com.example.musicprojectjpa.persistence.model.business.specific.Instrument"/>
+        </set>
+        <set name="musicTypes" access="field" lazy="true" cascade="save-update, lock, refresh, merge">
+            <key column="user_id" not-null="true"/>
+            <one-to-many entity-name="com.example.musicprojectjpa.persistence.model.business.specific.MusicType"/>
+        </set>
+        <set name="sheetMusics" access="field" lazy="true" cascade="save-update, lock, refresh, merge">
+            <key column="user_id" not-null="true"/>
+            <one-to-many entity-name="com.example.musicprojectjpa.persistence.model.business.specific.SheetMusic"/>
+        </set>
+        <set name="notes" access="field" lazy="true" cascade="save-update, lock, refresh, merge">
+            <key column="user_id" not-null="true"/>
+            <one-to-many entity-name="com.example.musicprojectjpa.persistence.model.business.general.Note"/>
+        </set>
+
         <properties name="userProperties">
             <property access="field" name="password" column="password"/>
             <property access="field" name="enabled" column="enabled"/>
         </properties>
+
     </class>
 </hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DatabaseMigrationSettings">
+    <database-infos>
+      <database-info>
+        <dbms-id>mysql</dbms-id>
+        <mapping-types>
+          <mapping-type sql-type-parameter="Nothing">
+            <java-class>U</java-class>
+            <sql-type>int</sql-type>
+          </mapping-type>
+        </mapping-types>
+      </database-info>
+    </database-infos>
+  </component>
+  <component name="JpaPluginProjectSettings">
+    <option name="entityNameTemplate" value="${className}" />
+    <option name="generateSerialVersionUID" value="true" />
+    <option name="isLombokGetterAndSetter" value="true" />
+    <option name="isLombokToString" value="true" />
+    <option name="isLombokOnlyExplicitlyIncluded" value="true" />
+    <option name="isLombokAllArgsConstructor" value="true" />
+    <option name="isLombokNoArgsConstructor" value="true" />
+    <option name="useLazyOnToOneAssociations" value="true" />
+    <option name="scaffoldingLanguage" />
+  </component>
+</project>
